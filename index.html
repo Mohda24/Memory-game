@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class=" bg-[#4B8E25] min-h-[100vh]" data-aos="zoom-in" data-aos-easing="ease-out-cubic"
+data-aos-duration="2000">
+    <header data-aos="flip-left"
+    data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000"  class="bg-[url('img/slide.png')] h-[120px] w-full flex items-center justify-center relative">
+        <div class="score h-[90px] w-[600px] relative " data-aos="fade-right" data-aos-delay="900"
+        data-aos-duration="1000">
+            <img src="img/Score.png" alt="" class="w-full h-full">
+            <img  src="img/top.png" width="25px" style="left: 39px;" id="top" class="absolute top-[-12px] transition-all duration-[0.5s] ease-linear">
+            <img  src="img/bottom.png" id="bottom" width="25px" style="left: 39px;" class="absolute bottom-[-12px] transition-all duration-[0.5s] ease-linear">
+        </div>
+        <!-- Time -->
+            <div class="div flex absolute left-[5px] top-[-100%] py-2 px-3 text-[20px] text-white border-white border-2 rounded boxed transition-all duration-500 ease-in ">
+                <h4 class="font-bold me-1">Time:</h4>
+                <p><span class="minute">00</span>:<span class="second">00</span></p>
+            </div>
+            <!-- Restart Game -->
+            <a href="index.html" id="restart" class="cursor-pointer absolute top-[-100%] right-[5px] py-2 px-3 rounded bg-red-600 text-white font-mono  font-bold text-[16px] hover:mybox hover:transition-all hover:duration-[0.5s] transition-all duration-500 ease-in boxed ">Restart Game</a>
+             
+    </header>
+    <main data-aos="zoom-in" data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000" class="w-[550px] h-[440px] bg-[#641F16] mx-auto mt-[20px] rounded-[37px] items-center justify-center flex flex-wrap gap-[7px] p-1">
+        <a id="start" class="cursor-pointer animate-bounce py-4 px-5 rounded-[15px] bg-red-600 text-white font-mono  font-bold text-[20px] hover:mybox hover:transition-all hover:duration-[0.5s] ">Start Game</a>
+        
+    </main>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
