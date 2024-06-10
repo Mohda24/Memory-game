@@ -4,36 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="aos-master/dist/aos.css">
     <link rel="stylesheet" href="style.css">
-    <!-- aos -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+   
 </head>
-<body class=" bg-[#4B8E25] min-h-[100vh]" data-aos="zoom-in" data-aos-easing="ease-out-cubic"
+<body class="bg-[#4B8E25] min-h-[100vh]" data-aos="zoom-in" data-aos-easing="ease-out-cubic"
 data-aos-duration="2000">
     <header data-aos="flip-left"
     data-aos-easing="ease-out-cubic"
-    data-aos-duration="2000"  class="bg-[url('img/slide.png')] h-[120px] w-full flex items-center justify-center relative">
-        <div class="score h-[90px] w-[600px] relative " data-aos="fade-right" data-aos-delay="900"
+    data-aos-duration="2000" class="bg-[url('img/slide.png')] h-[120px] w-full flex items-center justify-center relative">
+        <div class="score h-[90px] w-[600px] relative" data-aos="fade-right" data-aos-delay="900"
         data-aos-duration="1000">
             <img src="img/Score.png" alt="" class="w-full h-full">
-            <img  src="img/top.png" width="25px" style="left: 39px;" id="top" class="absolute top-[-12px] transition-all duration-[0.5s] ease-linear">
-            <img  src="img/bottom.png" id="bottom" width="25px" style="left: 39px;" class="absolute bottom-[-12px] transition-all duration-[0.5s] ease-linear">
+            <img src="img/top.png" width="25px" style="left: 39px;" id="top" class="absolute top-[-12px] transition-all duration-[0.5s] ease-linear">
+            <img src="img/bottom.png" id="bottom" width="25px" style="left: 39px;" class="absolute bottom-[-12px] transition-all duration-[0.5s] ease-linear">
         </div>
         <!-- Time -->
-            <div class="div flex absolute left-[5px] top-[-100%] py-2 px-3 text-[20px] text-white border-white border-2 rounded boxed transition-all duration-500 ease-in ">
-                <h4 class="font-bold me-1">Time:</h4>
-                <p><span class="minute">00</span>:<span class="second">00</span></p>
-            </div>
-            <!-- Restart Game -->
-            <a href="index.html" id="restart" class="cursor-pointer absolute top-[-100%] right-[5px] py-2 px-3 rounded bg-red-600 text-white font-mono  font-bold text-[16px] hover:mybox hover:transition-all hover:duration-[0.5s] transition-all duration-500 ease-in boxed ">Restart Game</a>
-             
+        <div class="div flex absolute left-[5px] top-[-100%] py-2 px-3 text-[20px] text-white border-white border-2 rounded boxed transition-all duration-500 ease-in">
+            <h4 class="font-bold me-1">Time:</h4>
+            <p><span class="minute">00</span>:<span class="second">00</span></p>
+        </div>
+        <!-- Rules -->
+        <a id="rules" class="cursor-pointer absolute top-[-100%] right-[200px] py-2 px-3 rounded bg-red-600 text-white font-mono font-bold text-[16px] hover:mybox hover:transition-all hover:duration-[0.5s] transition-all duration-500 ease-in boxed">Rules</a>
+        <!-- Restart Game -->
+        <a href="index.html" id="restart" class="cursor-pointer absolute top-[-100%] right-[5px] py-2 px-3 rounded bg-red-600 text-white font-mono font-bold text-[16px] hover:mybox hover:transition-all hover:duration-[0.5s] transition-all duration-500 ease-in boxed">Restart Game</a>
     </header>
     <main data-aos="zoom-in" data-aos-easing="ease-out-cubic"
     data-aos-duration="2000" class="w-[550px] h-[440px] bg-[#641F16] mx-auto mt-[20px] rounded-[37px] items-center justify-center flex flex-wrap gap-[7px] p-1">
-        <a id="start" class="cursor-pointer animate-bounce py-4 px-5 rounded-[15px] bg-red-600 text-white font-mono  font-bold text-[20px] hover:mybox hover:transition-all hover:duration-[0.5s] ">Start Game</a>
-        
+        <a id="start" class="cursor-pointer animate-bounce py-4 px-5 rounded-[15px] bg-red-600 text-white font-mono font-bold text-[20px] hover:mybox hover:transition-all hover:duration-[0.5s]">Start Game</a>
     </main>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+    <!-- rules -->
+    <section class="transition-all duration-500 ease-out absolute rounded-[32px] translate-x-[-50%] top-[-100%] left-[50%] w-[400px] h-[450px] bg-[#FDD8A8]">
+        <div class="title bg-[#641F16] rounded-t-[32px] flex justify-between items-center py-[15px] pe-[15px] ps-[30px]">
+            <p class="text-[40px] font-[400] tracking-[-2px] text-[#FDD8A8]">Rules</p>
+            <img class="close w-[50px] h-[50px] cursor-pointer" src="img/close.svg" alt="">
+        </div>
+        <div class="body flex flex-col justify-between p-[30px] text-[#3B2819] font-[400] text-[20px]">
+            <p class="">Take in turns flipping 2 cards at a time (by clicking on them)</p>
+            <p>If they’re a match, take another turn, if not, flip them back</p>
+            <p>Keep score by clicking next to the numbers on the score slider at the top</p>
+        </div>
+    </section>
+    
+    <script src="aos-master/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script  src="js-confetti/dist/js-confetti.browser.js"></script>
+    
+
+    <script  src="script.js"></script>
 </body>
 </html>

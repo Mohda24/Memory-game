@@ -1,256 +1,181 @@
-AOS.init();
+
+const jsConfetti = new JSConfetti();
+
 // Sounds
-const wrong=new Audio("Wrong.mp3");
-const matched=new Audio("matched.mp3");
-const mytime=new Audio("mytime1.mp3")
-// time
-let minute=document.querySelector(".minute");
-let second=document.querySelector(".second");
+const wrong = new Audio("Wrong.mp3");
+const matched = new Audio("matched.mp3");
+const mytime = new Audio("mytime1.mp3");
+const winning= new Audio("win.mp3")
+mytime.volume = 0.1;
+wrong.volume = 0.2;
+// rulles
+let rule=document.querySelector("section");
 
-let min=0;
-let sec=0
+// Time elements
+let minute = document.querySelector(".minute");
+let second = document.querySelector(".second");
+
+let min = 0;
+let sec = 0;
 let repeatTime;
-// Function of time
-function time(){
-     mytime.play()
-    sec+=1
-    if(sec>=60)min+=1,sec=0;
-    second.innerHTML=sec<=9?`0${sec}`:sec;
-    minute.innerHTML=min<=9?`0${min}`:min;
-   
+
+// Time function
+function time() {
+    mytime.play();
+    sec += 1;
+    if (sec >= 60) {
+        min += 1;
+        sec = 0;
+    }
+    second.innerHTML = sec <= 9 ? `0${sec}` : sec;
+    minute.innerHTML = min <= 9 ? `0${min}` : min;
 }
 
-
-
-
-// Functions
 // Check winners
-function win(){
-    let winner=document.querySelectorAll(".flip")
-    winner.length==20?clearInterval(repeatTime):false
+function win() {
+    let winner = document.querySelectorAll(".flip");
+    if (winner.length === 20) {
+        clearInterval(repeatTime);
+        let main = document.querySelector("main");
+        
+        main.classList.add("items-center", "justify-center");
+        main.innerHTML = `
+        <p class="text-[40px] font-[900] text-[#FDD8A8]">Congratution!😎🎉🎉</p>
+        <p class=" text-white text-[30px] font-bold">Time: ${minute.innerHTML}:${second.innerHTML}</p>`;
+        setInterval(()=>{
+            jsConfetti.addConfetti();
+        },1000)
+        winning.play();
+    }
 }
-// Function of flipcard
+
+// Flip card
+let lock = false;
+let hasFlipedCard = false;
+let firstCard, secondCard;
+
 function flipcard() {
     if (lock) return;
-    console.log(this);
-    if (this == firstcard) return;
+    if (this === firstCard) return;
     this.classList.add("flip");
-    if (!hasflipedcard) {
-        hasflipedcard = true;
-        firstcard = this;
+    if (!hasFlipedCard) {
+        hasFlipedCard = true;
+        firstCard = this;
         return;
     }
-    secondcard = this;
+    secondCard = this;
     check();
 }
 
-// Function of check for Matched
+// Check for matched cards
 function check() {
-    let ismatch = firstcard.lastElementChild.firstElementChild.getAttribute("data-name") == secondcard.lastElementChild.firstElementChild.getAttribute("data-name")
-    console.log(firstcard.lastElementChild.firstElementChild.getAttribute("data-name"));
-    ismatch ? disablecards() : unflipedcard();
+    let isMatch = firstCard.querySelector("img").dataset.name === secondCard.querySelector("img").dataset.name;
+    isMatch ? disablecards() : unflipedcard();
 }
 
-// Functions disable cards
+// Disable matched cards
 function disablecards() {
-    firstcard.removeEventListener('click', flipcard);
-    secondcard.removeEventListener('click', flipcard);
-    firstcard.style.opacity=0.5
-    secondcard.style.opacity=0.5
-    matched.play()
+    firstCard.removeEventListener('click', flipcard);
+    secondCard.removeEventListener('click', flipcard);
+    firstCard.style.opacity = 0.5;
+    secondCard.style.opacity = 0.5;
+    matched.play();
     reset();
     score();
-    win()
+    win();
 }
 
-// Function unflipedcard
+// Unflip unmatched cards
 function unflipedcard() {
     lock = true;
     setTimeout(() => {
-        firstcard.classList.remove("flip");
-        secondcard.classList.remove("flip");
+        firstCard.classList.remove("flip");
+        secondCard.classList.remove("flip");
         reset();
         wrong.play();
     }, 1500);
 }
 
-// Function reset
+// Reset card states
 function reset() {
-    firstcard = null;
-    secondcard = null;
-    hasflipedcard = false;
-    lock = false;
+    [hasFlipedCard, lock] = [false, false];
+    [firstCard, secondCard] = [null, null];
 }
 
-// Function score
+// Score function
+let scoreTop = document.getElementById("top");
+let scoreBottom = document.getElementById("bottom");
+scoreTop.style.left = "38px";
+scoreBottom.style.left = "38px";
+
 function score() {
-    score_top.style.left = `${parseInt(score_top.style.left) + 48}px`;
-    score_bottom.style.left = (parseInt(score_bottom.style.left) + 48) + "px";
+    scoreTop.style.left = `${parseInt(scoreTop.style.left) + 48}px`;
+    scoreBottom.style.left = `${parseInt(scoreBottom.style.left) + 48}px`;
 }
 
 // Start game
 document.getElementById("start").addEventListener("click", function () {
-    document.querySelector(".div").style.top="5px"
-    document.querySelector("#restart").style.top="5px"
-     repeatTime=setInterval(time,1000)
-    document.querySelector("body").classList.add("mohdaking")
-    let main = document.querySelector("main");
-    main.classList.remove("items-center");
-    main.classList.remove("justify-center");
-    main.innerHTML = `
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/anaconda.png" data-name="anaconda" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/anaconda.png" data-name="anaconda" alt="">
-            </div>
-        </div>
-        <!-- firs -->
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/bee.png" data-name="bee" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/bee.png" data-name="bee" alt="">
-            </div>
-        </div>
-        <!-- hhh -->
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/chameleon.png" data-name="chameleon" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/chameleon.png" data-name="chameleon" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/cockatoo.png" data-name="cockatoo" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/cockatoo.png" data-name="cockatoo" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/gorilla.png" data-name="gorilla" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/gorilla.png" data-name="gorilla" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/macaw.png" data-name="macaw" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/macaw.png" data-name="macaw" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/monkey.png" data-name="monkey" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/monkey.png" data-name="monkey" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/piranha.png" data-name="piranha" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/piranha.png" data-name="piranha" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/sloth.png" data-name="sloth" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/sloth.png" data-name="sloth" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/tiger.png" data-name="tiger" alt="">
-            </div>
-        </div>
-        <div class="card">
-            <div class="front">?</div>
-            <div class="back">
-                <img src="img/tiger.png" data-name="tiger" alt="">
-            </div>
-        </div>
-    `;
+    lock = true;
+    document.querySelector(".div").style.top = "5px";
+    document.querySelector("#restart").style.top = "5px";
+    document.querySelector("#rules").style.top = "5px";
+    
+    repeatTime = setInterval(time, 1000);
+    document.querySelector("body").classList.add("mohdaking");
 
-    // Reinitialize cards after updating the HTML
+    let main = document.querySelector("main");
+    main.classList.remove("items-center", "justify-center");
+    main.innerHTML = generateCardsHtml();
     let cards = document.querySelectorAll(".card");
+
     cards.forEach(card => {
         card.addEventListener("click", flipcard);
         let pos = Math.floor(Math.random() * 20);
         card.style.order = pos;
     });
+
+    setTimeout(() => {
+        cards.forEach(card => {
+            card.classList.remove("flip");
+            lock = false;
+        });
+    }, 4000);
 });
 
-// let cards;
-let lock = false;
-let firstcard, secondcard;
-let hasflipedcard = false;
-let score_top = document.getElementById("top");
-let score_bottom = document.getElementById("bottom");
-
-// Ensure the initial left style is set
-score_top.style.left ="38px";
-score_bottom.style.left ="38px";
-// Function of shuffle
-function shuffle() {
-    cards.forEach(card => {
-        let pos = Math.floor(Math.random() * 20);
-        card.style.order = pos;
+// Generate card HTML
+function generateCardsHtml() {
+    const animals = ["anaconda", "bee", "chameleon", "cockatoo", "gorilla", "macaw", "monkey", "piranha", "sloth", "tiger"];
+    let cardsHtml = "";
+    animals.forEach(animal => {
+        cardsHtml += `
+            <div class="card flip">
+                <div class="front">?</div>
+                <div class="back">
+                    <img src="img/${animal}.png" data-name="${animal}" alt="">
+                </div>
+            </div>
+            <div class="card flip">
+                <div class="front">?</div>
+                <div class="back">
+                    <img src="img/${animal}.png" data-name="${animal}" alt="">
+                </div>
+            </div>`;
     });
+    return cardsHtml;
 }
 
-// // Add events to initial cards
-// cards.forEach(card => {
-//     card.addEventListener("click", flipcard);
-// });
+// Rules button
+document.querySelector("#rules").addEventListener("click", function () {
+    rule.style.top = "20px";
+    document.body.classList.add("filter");
+    document.querySelector("header").style.filter = "blur(8px)";
+    document.querySelector("main").style.filter = "blur(8px)";
+});
 
+// Close rules button
+document.querySelector(".close").addEventListener("click", function () {
+    rule.style.top = "-100%";
+    document.body.classList.remove("filter");
+    document.querySelector("header").style.filter = "blur(0px)";
+    document.querySelector("main").style.filter = "blur(0px)";
+});
