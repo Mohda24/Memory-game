@@ -674,6 +674,14 @@ body::before {
   -o-transition: all 0.6s ease-in-out;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -731,8 +739,8 @@ body::before {
   height: 120px;
 }
 
-.h-\[440px\] {
-  height: 440px;
+.h-\[200px\] {
+  height: 200px;
 }
 
 .h-\[450px\] {
@@ -751,8 +759,24 @@ body::before {
   height: 100%;
 }
 
+.h-\[300px\] {
+  height: 300px;
+}
+
+.h-\[30px\] {
+  height: 30px;
+}
+
+.h-\[350px\] {
+  height: 350px;
+}
+
 .min-h-\[100vh\] {
   min-height: 100vh;
+}
+
+.w-\[300px\] {
+  width: 300px;
 }
 
 .w-\[400px\] {
@@ -763,16 +787,24 @@ body::before {
   width: 50px;
 }
 
-.w-\[550px\] {
-  width: 550px;
-}
-
 .w-\[600px\] {
   width: 600px;
 }
 
 .w-full {
   width: 100%;
+}
+
+.w-\[\] {
+  width: ;
+}
+
+.w-\[90\] {
+  width: 90;
+}
+
+.w-\[90\%\] {
+  width: 90%;
 }
 
 .translate-x-\[-50\%\] {
@@ -826,6 +858,14 @@ body::before {
 
 .gap-\[7px\] {
   gap: 7px;
+}
+
+.gap-\[\] {
+  gap: ;
+}
+
+.gap-\[4px\] {
+  gap: 4px;
 }
 
 .rounded {
@@ -935,12 +975,20 @@ body::before {
   font-size: 20px;
 }
 
+.text-\[30px\] {
+  font-size: 30px;
+}
+
 .text-\[40px\] {
   font-size: 40px;
 }
 
 .font-\[400\] {
   font-weight: 400;
+}
+
+.font-\[900\] {
+  font-weight: 900;
 }
 
 .font-bold {
@@ -1049,4 +1097,18 @@ main{
 
 .hover\:duration-\[0\.5s\]:hover {
   transition-duration: 0.5s;
+}
+
+@media (min-width: 768px) {
+  .md\:h-\[440px\] {
+    height: 440px;
+  }
+
+  .md\:w-\[550px\] {
+    width: 550px;
+  }
+
+  .md\:gap-\[7px\] {
+    gap: 7px;
+  }
 }
